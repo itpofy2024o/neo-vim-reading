@@ -32,4 +32,21 @@ return {
       },
     },
   },
+  {
+    "stevearc/aerial.nvim",
+    opts = {
+      -- Neovim 0.12 currently breaks Aerial's Treesitter backend in some buffers.
+      -- Keep the outline feature, but avoid the startup callback crash.
+      backends = { "lsp" },
+      open_automatic = false,
+    },
+  },
+  {
+    "nvimtools/none-ls.nvim",
+    enabled = false,
+  },
+  {
+    "jay-babu/mason-null-ls.nvim",
+    enabled = false,
+  },
 }
