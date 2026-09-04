@@ -33,6 +33,30 @@ return {
     },
   },
   {
+    "nvim-pack/nvim-spectre",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    cmd = "Spectre",
+  },
+  {
+    "MeanderingProgrammer/render-markdown.nvim",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons",
+    },
+    ft = { "markdown", "codecompanion" },
+    opts = {
+      file_types = { "markdown", "codecompanion" },
+    },
+  },
+  {
+    "lervag/vimtex",
+    ft = { "tex", "plaintex", "bib" },
+    init = function()
+      vim.g.vimtex_view_method = "general"
+      vim.g.vimtex_quickfix_mode = 0
+    end,
+  },
+  {
     "stevearc/aerial.nvim",
     opts = {
       -- Neovim 0.12 currently breaks Aerial's Treesitter backend in some buffers.
