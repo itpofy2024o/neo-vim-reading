@@ -13,7 +13,22 @@ vim.opt.splitbelow = true
 -- and background values; disabling true-colour avoids cyan background blocks.
 vim.opt.termguicolors = false
 vim.opt.background = "dark"
-vim.cmd.colorscheme "retrobox"
+local theme_file = vim.fn.stdpath "state" .. "/selected-colorscheme"
+local ok, saved = pcall(vim.fn.readfile, theme_file)
+local saved_theme = ok and saved[1] or nil
+if saved_theme and saved_theme ~= "" then
+  pcall(vim.cmd.colorscheme, saved_theme)
+else
+  vim.cmd.colorscheme "retrobox"
+end
+vim.api.nvim_create_autocmd("VimLeavePre", {
+  callback = function()
+    if vim.g.colors_name and vim.g.colors_name ~= "" then
+      vim.fn.mkdir(vim.fn.fnamemodify(theme_file, ":h"), "p")
+      vim.fn.writefile({ vim.g.colors_name }, theme_file)
+    end
+  end,
+})
 
 map("n", "<C-p>", "<Cmd>Telescope find_files<CR>", { desc = "Quick open file", silent = true })
 map("n", "<C-S-p>", "<Cmd>Telescope commands<CR>", { desc = "Command palette", silent = true })
