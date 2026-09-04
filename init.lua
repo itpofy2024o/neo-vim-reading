@@ -4,6 +4,13 @@
 -- Silence that upstream-only notice until AstroNvim replaces it.
 vim.deprecate = function() end
 
+-- AstroNvim starts the Neovim 0.12 Treesitter highlighter directly. Its
+-- current query path can call `range()` on an invalid node, so make startup
+-- safe until the upstream compatibility fix lands.
+if vim.treesitter then
+  vim.treesitter.start = function() end
+end
+
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
