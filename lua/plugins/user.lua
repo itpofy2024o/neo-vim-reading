@@ -45,6 +45,10 @@ return {
     },
     ft = { "markdown", "codecompanion" },
     opts = {
+      -- Neovim 0.12's Treesitter query API is currently incompatible with
+      -- render-markdown's injection queries; keep the plugin available but
+      -- prevent its asynchronous renderer from crashing Markdown buffers.
+      enabled = false,
       file_types = { "markdown", "codecompanion" },
     },
   },
