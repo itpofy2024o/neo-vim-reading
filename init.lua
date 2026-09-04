@@ -1,5 +1,9 @@
 -- This file simply bootstraps the installation of Lazy.nvim and then calls other files for execution
 -- This file doesn't necessarily need to be touched, BE CAUTIOUS editing this file and proceed at your own risk.
+-- AstroNvim currently calls the deprecated vim.lsp.with() API during startup.
+-- Silence that upstream-only notice until AstroNvim replaces it.
+vim.deprecate = function() end
+
 local lazypath = vim.env.LAZY or vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
 if not (vim.env.LAZY or (vim.uv or vim.loop).fs_stat(lazypath)) then
   -- stylua: ignore
