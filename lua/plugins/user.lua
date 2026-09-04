@@ -2,6 +2,12 @@
 -- terminal, LSP, completion, Git signs, and diagnostics used below.
 return {
   {
+    -- This optional plugin invokes Treesitter during InsertLeave and is
+    -- incompatible with Neovim 0.12's current node API.
+    "windwp/nvim-ts-autotag",
+    enabled = false,
+  },
+  {
     "nvim-neo-tree/neo-tree.nvim",
     opts = {
       filesystem = {
