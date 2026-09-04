@@ -4,11 +4,12 @@
 return {
   "nvim-treesitter/nvim-treesitter",
   opts = {
-    -- The Markdown parser's injection/highlight queries currently trigger a
-    -- Neovim 0.12 `node:range()` callback error. Keep Treesitter highlighting
-    -- for code while using Vim's stable syntax highlighting for Markdown.
+    -- Neovim 0.12 currently crashes in the Treesitter highlighter when a
+    -- parser query returns a node without `range()`. Disable the highlighter
+    -- until the upstream parser/query compatibility is fixed; Vim syntax
+    -- highlighting and all LSP features continue to work.
     highlight = {
-      disable = { "markdown", "markdown_inline" },
+      enable = false,
     },
     ensure_installed = {
       "vim",
